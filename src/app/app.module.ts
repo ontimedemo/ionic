@@ -12,8 +12,8 @@ import { ProfilePage } from "../pages/profile/profile";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { UtilProvider } from '../providers/util/util';
-import { AuthProvider } from '../providers/auth/auth';
+import { UtilServiceProvider } from '../providers/util-service/util-service';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,10 @@ import { AuthProvider } from '../providers/auth/auth';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      spinner: 'bubbles',
+      tabsPlacement: 'bottom'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,8 +46,8 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UtilProvider,
-    AuthProvider
+    UtilServiceProvider,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}
