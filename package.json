@@ -42,6 +42,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-sourcemaps": "^2.6.1",
+    "gulp-tslint": "^8.1.2",
     "run-sequence": "^2.1.0",
     "typescript": "2.3.4"
   },

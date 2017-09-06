@@ -1,8 +1,9 @@
-let gulp = require('gulp'),
-  babel = require('gulp-babel'),
-  sourcemaps = require('gulp-sourcemaps'),
-  concat = require('gulp-concat'),
-  jsdoc = require('gulp-jsdoc3');
+var gulp = require("gulp");
+var babel = require("gulp-babel");
+var sourcemaps = require("gulp-sourcemaps");
+var concat = require("gulp-concat");
+var jsdoc = require("gulp-jsdoc3");
+var tslint = require("gulp-tslint");
 
 /**
  * Documentation Task
@@ -11,8 +12,19 @@ let gulp = require('gulp'),
  *  Can be set with custom config file
  */
 gulp.task('docs', function(callback) {
-  gulp.src(['README.md', './src/**/*.js'], {read: false})
+  gulp.src(['README.md', './src/**/*.ts'], {read: false})
     .pipe(jsdoc(callback));
+});
+
+/**
+ * Tslint Task
+ */
+gulp.task('tslint', () => {
+  gulp.src('./src/**/*.ts')
+    .pipe(tslint({
+      formatter: "stylish"
+    }))
+    .pipe(tslint.report())
 });
 
 /**
@@ -21,7 +33,7 @@ gulp.task('docs', function(callback) {
 gulp.task('default', function() {
   let runSequence = require('run-sequence');
 
-  runSequence('docs');
+  runSequence('docs', 'tslint');
   // return gulp.src('src/**/*.js')
   //   .pipe(sourcemaps.init())
   //   .pipe(babel())
